@@ -1,0 +1,29 @@
+#### Step 1: Add the Data
+
+1.  In the VS Code Explorer on the left, click the "New Folder" icon to create a directory. Name it `data` and press Enter.
+2.  Click on the newly created `data` folder to select it. Now, click the "New File" icon to create a file inside it. Name the file `sentiments.csv`.
+3.  The `sentiments.csv` file will open in the editor. Copy and paste the following content into it, then save the file.
+    ```csv
+    text,label
+    "I loved this film",1
+    "Terrible acting and a weak plot",0
+    "Surprisingly good",1
+    "That was bad",0
+    "Not my cup of tea",0
+    "Absolutely brilliant from start to finish",1
+    "Utter rubbish, I almost walked out",0
+    "Decent story and lovely soundtrack",1
+    "Boring and far too long",0
+    "The cast were fantastic",1
+    "The dialogue was cringeworthy",0
+    "Exceeded my expectations",1
+    "I would not recommend it",0
+    "A charming, feel-good watch",1
+    "Confusing plot and poor pacing",0
+    "Kept me on the edge of my seat",1
+    "Predictable with no surprises",0
+    "Beautifully shot and well acted",1
+    "The jokes fell flat",0
+    "An instant favourite",1
+    "Disappointing ending",0
+    ```
