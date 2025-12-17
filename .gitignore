@@ -207,3 +207,52 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/ 
+
+Python Bytecode
+
+pycache/
+*.py[cod]
+*$py.class
+
+Virtuelle Umgebungen
+
+.venv/
+venv/
+env/
+bin/
+sentiment-analysis-env/
+
+IDE Einstellungen
+
+.vscode/
+.idea/
+.DS_Store
+
+# ------------------------------------------------
+#  ️  ️  ️  ️  ️ab hier von Gemini kreiert, um den Projekt-Ordner zu säubern ️  ️  ️  ️  ️
+# ------------------------------------------------  
+
+Projektspezifische Daten
+
+Wir ignorieren die generierten Vorhersagen
+
+data/predictions.csv
+
+Optional: Den gesamten data-Ordner ignorieren,
+
+aber die sentiments.csv (Eingabe) behalten
+
+data/*
+
+!data/sentiments.csv
+
+Modelle
+
+models/
+*.joblib
+*.pkl
+
+Logs und temporäre Dateien
+
+*.log
+.ruff_cache/
