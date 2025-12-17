@@ -1,0 +1,13 @@
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "T20"] 
+
+[tool.ruff.lint.isort]
+# Für spezielle lokale Ordner, die als "eigene" Module erkannt werden sollen
+known-first-party = ["src"]
+
+[tool.ruff.format]
+quote-style = "double"
+docstring-code-format = true

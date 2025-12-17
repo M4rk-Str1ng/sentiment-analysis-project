@@ -1,11 +1,14 @@
-import os 
-import pandas as pd 
 import argparse
-from sklearn.model_selection import train_test_split 
+import logging
+import os
+
+import pandas as pd
+from joblib import dump  # --- soll auf Empfehlung geändert zu: --- 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
-from sklearn.pipeline import Pipeline, make_pipeline 
-from joblib import dump # --- soll auf Empfehlung geändert zu: --- 
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline, make_pipeline
+
 # import joblib 
 
 
@@ -27,7 +30,7 @@ def split_data(
     try:
         # Stratified split is preferred
         X_train, X_test, y_train, y_test = train_test_split(
-            df["text"], df["label"], test_size=0.2, random_state=42, stratify=df["label"]
+            df["text"], df["label"], test_size=0.2, random_state=42, stratify=df["label"] # noqa: E501
         )
     except ValueError:
         # Fallback if stratification fails (e.g., on very small datasets)
@@ -53,7 +56,7 @@ def save_model(model: Pipeline, model_path: str) -> None:
     """
     os.makedirs(os.path.dirname(model_path), exist_ok=True)
     dump(model, model_path)
-    print(f"Saved model to {model_path}") 
+    print(f"Saved model to {model_path}") # noqa: T201
 
 def main(data_path: str, model_path: str) -> None:
     """
@@ -65,7 +68,7 @@ def main(data_path: str, model_path: str) -> None:
 
     # Evaluate and print accuracy
     acc = clf.score(X_test, y_test)
-    print(f"Test accuracy: {acc:.3f}")
+    logging.info(f"Test accuracy: {acc:.3f}")
 
     save_model(clf, model_path) 
 

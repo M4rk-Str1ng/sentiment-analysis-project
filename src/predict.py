@@ -2,8 +2,8 @@ import argparse
 from typing import Any
 
 import numpy as np
-from numpy.typing import NDArray
 from joblib import load
+from numpy.typing import NDArray
 
 
 def load_model(model_path: str) -> Any:
@@ -47,7 +47,7 @@ def main(
     classifier = load_model(model_path)
     preds, probs = predict_texts(classifier, input_texts)
     for line in format_prediction_lines(input_texts, preds, probs):
-        print(line)
+        print(line) # noqa: T201
 
 
 if __name__ == "__main__":
