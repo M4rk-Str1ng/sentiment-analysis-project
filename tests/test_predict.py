@@ -35,6 +35,6 @@ class TestPredictLogic(unittest.TestCase):
         self.assertEqual(len(preds), 0)
         self.assertEqual(len(probs), 0)
 
-if __name__ == "__main__":
-    unittest.main() 
 
+if __name__ == "__main__":
+    unittest.main()
