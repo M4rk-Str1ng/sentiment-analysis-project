@@ -1,9 +1,10 @@
 # tests/test_predict.py
 
 import unittest
-import numpy as np
+
 # Wir importieren die Logik direkt aus deinem src-Ordner
 from src.predict import DummyClassifier, predict_texts
+
 
 class TestPredictLogic(unittest.TestCase):
     """

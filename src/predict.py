@@ -7,13 +7,16 @@ from typing import Any
 import numpy as np
 from numpy.typing import NDArray
 
+
 # --- Dummy-Klassifikator ---
 # Wir bauen eine Klasse, die sich genau wie ein scikit-learn Modell verhält.
 # So bleibt deine restliche Logik (predict_texts) unangetastet.
 class DummyClassifier:
     def predict(self, texts: list[str]) -> NDArray[Any]:
         # Einfache Regel: 1 bei "gut" oder "freue", sonst 0
-        preds = [1 if any(word in t.lower() for word in ["gut", "freue", "super"]) else 0 for t in texts]
+        preds = [1 if any(word in t.lower() 
+        for word in ["gut", "freue", "super"]) 
+        else 0 for t in texts]
         return np.array(preds)
 
     def predict_proba(self, texts: list[str]) -> NDArray[np.float64]:
@@ -55,7 +58,10 @@ def format_prediction_lines(
             lines.append(f"{pred}\t{prob:.3f}\t{text}")
     return lines
 
-def main(model_path: str, input_texts: list[str], output_path: str | None = None) -> None:
+def main(
+    model_path: str, 
+    input_texts: list[str], 
+    output_path: str | None = None) -> None:
     classifier = load_model(model_path)
     preds, probs = predict_texts(classifier, input_texts)
     
@@ -89,7 +95,7 @@ if __name__ == "__main__":
         final_texts = args.text
 
     if not final_texts:
-        # Ein kleiner Standard-Text, falls alles leer ist, damit die Pipeline was zu tun hat
+        # Ein Standard-Text, falls alles leer ist, damit die Pipeline was zu tun hat
         final_texts = ["Das ist ein Testlauf.", "Ich freue mich über den grünen Haken!"]
 
     main(
