@@ -41,6 +41,11 @@ def predict_texts(
     classifier: Any, input_texts: list[str]
 ) -> tuple[list[int], list[float | None]]:
     """Gibt Labels und Wahrscheinlichkeiten für jeden Text zurück."""
+
+    # FIX: Falls die Eingabe leer ist, sofort leere Listen zurückgeben
+    if not input_texts:
+        return [], []
+
     preds: NDArray[Any] = classifier.predict(input_texts)
     if hasattr(classifier, "predict_proba"):
         probs_arr: NDArray[np.float64] = classifier.predict_proba(input_texts)[:, 1]
@@ -63,9 +68,8 @@ def format_prediction_lines(
     return lines
 
 
-def main(
-    model_path: str, input_texts: list[str], output_path: str | None = None
-) -> None:
+def main(model_path: str, 
+    input_texts: list[str], output_path: str | None = None) -> None:
     classifier = load_model(model_path)
     preds, probs = predict_texts(classifier, input_texts)
 
