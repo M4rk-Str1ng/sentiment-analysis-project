@@ -61,8 +61,8 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run tests
-        # Führt die Unit-Tests im tests/ Ordner aus
-        run: pytest tests/
+        # PYTHONPATH=. sorgt dafür, dass der 'src' Ordner gefunden wird
+        run: PYTHONPATH=. python -m pytest tests/
 
       - name: Run the predict script (Sanity Check)
         run: |
