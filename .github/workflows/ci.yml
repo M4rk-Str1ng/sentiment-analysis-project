@@ -17,9 +17,32 @@ on:
       - ".github/workflows/**"
 
 jobs:
-  # 1. Job: Testen und Validieren
+  # 1. Job: Code-Qualität (Ruff) - Das "Quality Gate"
+  quality_gate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Ruff
+        run: pip install ruff
+
+      - name: Run Ruff Check (Linter)
+        run: ruff check .
+
+      - name: Run Ruff Format Check (Formatter)
+        run: ruff format . --check
+
+  # 2. Job: Testen und Validieren
   test_and_predict:
     runs-on: ubuntu-latest
+    # Wartet auf den erfolgreichen Ruff-Check
+    needs: [quality_gate]
     timeout-minutes: 5
 
     steps:
@@ -42,14 +65,13 @@ jobs:
         run: pytest tests/
 
       - name: Run the predict script (Sanity Check)
-        # Prüft, ob das Skript mit echten Daten durchläuft
         run: |
           python src/predict.py --input data/sentiments.csv --output data/predictions.csv
 
-  # 2. Job: Docker Image bauen und hochladen
+  # 3. Job: Docker Image bauen und hochladen
   build_and_push:
     runs-on: ubuntu-latest
-    # Dieser Job startet erst, wenn 'test_and_predict' erfolgreich war!
+    # Wartet darauf, dass die Tests (und indirekt Ruff) bestanden sind
     needs: [test_and_predict]
     
     steps:
@@ -67,6 +89,4 @@ jobs:
         with:
           context: .
           push: true
-          # Nutzt deinen Usernamen aus den Secrets für den Image-Namen
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/sentiment-analysis-project:latest 
-
