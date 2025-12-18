@@ -103,4 +103,4 @@ if __name__ == "__main__":
         # Ein Standard-Text, falls alles leer ist, damit die Pipeline was zu tun hat
         final_texts = ["Das ist ein Testlauf.", "Ich freue mich über den grünen Haken!"]
 
-    main(model_path=args.model, input_texts=final_texts, output_path=args.output)
+    main(model_path=args.model, input_texts=final_texts, output_path=args.output) 
